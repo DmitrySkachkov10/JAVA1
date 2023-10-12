@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Фильтрация</title>
+</head>
+<body>
+<h1>Фильтрация</h1>
+<form action="http://localhost:8080/Mk-JD2-103-23.group3.airplane-1.0-SNAPSHOT/flight" method="post">
+    <label for="filters">Выберите фильтры:</label>
+    <select id="filters" name="filters" multiple>
+        <option value="SORT_BY_DATE_DEPARTURE">Сортировка по Дате вылета</option>
+        <option value="SORT_BY_DATE_ARRIVAL">Сортировка по Дате прилета</option>
+        <option value="SORT_BY_STATUS">Сортировка по Статусу полета</option>
+        <option value="SORT_BY_ORIGIN">Сортировка по Месту улета</option>
+        <option value="SORT_BY_DESTINATION">Сортировка по Месту прибытия</option>
+    </select><br>
+    </p>
+    <label for="pageNumber">Номер страницы:</label>
+    <input type="text" id="pageNumber" name="page">
+    </p>
+    <label for="size">Записей на странице:</label>
+    <input type="text" id="size" name="size">
+    </p>
+    <input type="submit" value="Применить фильтр">
+</form>
+</body>
+</html>
