@@ -7,13 +7,6 @@ import java.util.List;
 
 public interface IFlightService {
     List<Flight> getFlights();
-
-
-    /**
-     *
-     * @param page number of page
-     * @param size how many objects on the page
-     * @return list of objects on this page
-     */
+    List<Flight> getFlights(int page, int size, List<String> filters);
     List<Flight> getFlights(int page, int size);
 }

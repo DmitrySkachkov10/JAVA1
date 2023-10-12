@@ -9,14 +9,20 @@ import java.util.List;
 
 public class FlightService implements IFlightService {
     IFlightDao flightDao;
+
     public FlightService(IFlightDao instance) {
         this.flightDao = instance;
     }
 
 
     @Override
-    public List<Flight> getFlights()  {
+    public List<Flight> getFlights() {
         return flightDao.getFlights();
+    }
+
+    @Override
+    public List<Flight> getFlights(int page, int size, List<String> filters) {
+        return flightDao.getFlights(page, size, filters);
     }
 
     @Override

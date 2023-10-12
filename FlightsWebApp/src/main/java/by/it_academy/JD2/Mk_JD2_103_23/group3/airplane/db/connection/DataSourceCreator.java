@@ -1,4 +1,4 @@
-package by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db;
+package by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.connection;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
