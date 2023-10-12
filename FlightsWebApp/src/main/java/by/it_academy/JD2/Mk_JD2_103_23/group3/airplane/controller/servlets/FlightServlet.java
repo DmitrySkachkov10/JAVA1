@@ -22,10 +22,18 @@ public class FlightServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Flight> flights = flightService.getFlights();
 
+        String page = req.getParameter("page");
+        String size = req.getParameter("size");
 
-        // Передаем управление JSP-файлу для отображения данных
+        if (page != null && size != null){
+            List<Flight> flights = flightService.getFlights(Integer.parseInt(page), Integer.parseInt(size));
+            req.setAttribute("flights", flights);
+        } else {
+            List<Flight> flights = flightService.getFlights();
+            req.setAttribute("flights", flights);
+        }
+
         req.getRequestDispatcher("/ui/flight.jsp").forward(req, resp);
 
 

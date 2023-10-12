@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Flight Information</h1>
-    <table>
+    <table border="1">
         <tr>
             <th>Flight ID</th>
             <th>Flight No</th>

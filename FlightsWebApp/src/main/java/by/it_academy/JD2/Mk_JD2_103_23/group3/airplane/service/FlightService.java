@@ -18,4 +18,9 @@ public class FlightService implements IFlightService {
     public List<Flight> getFlights()  {
         return flightDao.getFlights();
     }
+
+    @Override
+    public List<Flight> getFlights(int page, int size) {
+        return flightDao.getFlights(page, size);
+    }
 }
