@@ -26,21 +26,25 @@
         </tr>
         <c:forEach var="flight" items="${flights}">
             <tr>
-                <td>${flight.flightId}</td>
-                <td>${flight.flightNo}</td>
-                <td>${flight.scheduledDeparture}</td>
-                <td>${flight.scheduledDepartureLocal}</td>
-                <td>${flight.scheduledArrival}</td>
-                <td>${flight.getScheduledArrivalLocal}</td>
-                <td>${flight.interval}</td>
-                <td>${flight.departureAirport}</td>
-                <td>${flight.departureAirportName}</td>
-                <td>${flight.departureCity}</td>
-                <td>${flight.arrivalAirport}</td>
-                <td>${flight.arrivalAirportName}</td>
-                <td>${flight.arrivalCity}</td>
-                <td>${flight.status}</td>
-                <td>${flight.aircraftCode}</td>
+               <td>${flight.aircraftCode}</td>
+               <td>${flight.flightId}</td>
+               <td>${flight.flightNo}</td>
+               <td>${flight.scheduledDeparture}</td>
+               <td>${flight.scheduledDepartureLocal}</td>
+               <td>${flight.scheduledArrival}</td>
+               <td>${flight.scheduledArrivalLocal}</td>
+               <td>${flight.scheduledDuration}</td>
+               <td>${flight.departureAirport}</td>
+               <td>${flight.departureAirportName}</td>
+               <td>${flight.departureCity}</td>
+               <td>${flight.arrivalAirport}</td>
+               <td>${flight.arrivalAirportName}</td>
+               <td>${flight.arrivalCity}</td>
+               <td>${flight.status}</td>
+               <td>${flight.aircraftCode}</td>
+               <td>${flight.actualDeparture}</td>
+               <td>${flight.actualDepartureLocal}</td>
+               <td>${flight.actualArrival}</td>
             </tr>
         </c:forEach>
     </table>
