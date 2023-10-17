@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AirportService implements IAirportService {
-    IAirportDao airportDao;
+    private IAirportDao airportDao;
     public AirportService(IAirportDao instance) {
         this.airportDao = instance;
     }
@@ -18,8 +18,8 @@ public class AirportService implements IAirportService {
     @Override
     public List<Airport> getAirports() {
         return airportDao.getAirports().stream()
-                .map(airportEntity -> new Airport(airportEntity.getAirportName(),
+                .map(airportEntity -> new Airport(airportEntity.getAirportCode(), airportEntity.getAirportName(),
                         airportEntity.getCity(), airportEntity.getCoordinates(),
-                        airportEntity.getTimeZone())).collect(Collectors.toList());
+                        airportEntity.getTimezone())).collect(Collectors.toList());
     }
 }

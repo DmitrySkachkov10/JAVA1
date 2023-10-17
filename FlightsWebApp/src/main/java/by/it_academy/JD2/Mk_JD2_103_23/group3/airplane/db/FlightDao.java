@@ -5,6 +5,10 @@ import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.core.dto.PageSize;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.api.IFlightDao;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.connection.DataSourceCreator;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.entity.FlightEntity;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Query;
+import org.hibernate.Session;
+
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -13,6 +17,13 @@ import java.util.List;
 
 public class FlightDao implements IFlightDao {
     DataSource ds = DataSourceCreator.getInstance();
+
+    private final EntityManagerFactory emf;
+
+
+    public FlightDao(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
 
     private final static String GET_ALL_FLIGHT = "SELECT flight_id, flight_no, scheduled_departure, scheduled_departure_local, scheduled_arrival, scheduled_arrival_local, scheduled_duration, departure_airport, departure_airport_name, departure_city, arrival_airport, arrival_airport_name, arrival_city, status, aircraft_code, actual_departure, actual_departure_local, actual_arrival, actual_arrival_local, actual_duration FROM bookings.flights_v";
 
@@ -41,12 +52,12 @@ public class FlightDao implements IFlightDao {
             "    airports arr\n" +
             "  WHERE f.departure_airport = dep.airport_code AND f.arrival_airport = arr.airport_code";
 
-    public FlightDao() {
-    }
+
 
 
     @Override
     public List<FlightEntity> getFlights(FlightFilter filter, PageSize pageSize) {
+
         String sql = GET_ALL_FLIGHT;
 
         List<Object> params = new ArrayList<>();
@@ -130,13 +141,12 @@ public class FlightDao implements IFlightDao {
                 while (rs.next()) {
                     data.add(map(rs));
                 }
-
                 return data;
             }
         } catch (SQLException e) {
             throw new IllegalStateException("Ошибка получения информации об аэропортах", e);
         }
-    }
+}
 
     public FlightEntity map(ResultSet rs) throws SQLException {
         FlightEntity item = new FlightEntity();

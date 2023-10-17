@@ -11,7 +11,7 @@
     <h1>Aircraft Information</h1>
     <table border="1">
         <tr>
-            <th>Id</th>
+            <th>Сode</th>
             <th>AirportName</th>
             <th>City</th>
             <th>Coordinates</th>
@@ -20,7 +20,7 @@
         </tr>
         <c:forEach var="airport" items="${airports}">
             <tr>
-                <td>${airport.id}</td>
+                <td>${airport.airport_code}</td>
                 <td>${airport.airportName}</td>
                 <td>${airport.city}</td>
                 <td>${airport.coordinates}</td>

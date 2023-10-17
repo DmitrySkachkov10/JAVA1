@@ -1,13 +1,14 @@
 package by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.core.dto;
 
 public class Airport {
-    private String id;
+    private String airport_code;
     private String airportName;
     private String city;
     private String coordinates;
     private String timeZone;
 
-    public Airport(String airportName, String city, String coordinates, String timeZone) {
+    public Airport(String airport_code, String airportName, String city, String coordinates, String timeZone) {
+        this.airport_code = airport_code;
         this.airportName = airportName;
         this.city = city;
         this.coordinates = coordinates;
@@ -49,11 +50,11 @@ public class Airport {
         this.timeZone = timeZone;
     }
 
-    public String getId() {
-        return id;
+    public String getAirport_code() {
+        return airport_code;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setAirport_code(String airport_code) {
+        this.airport_code = airport_code;
     }
 }

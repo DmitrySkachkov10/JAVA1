@@ -5,7 +5,6 @@ import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.factory.AirplaneDaoFac
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.api.IAirplaneDao;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.service.api.IAirplaneService;
 
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +22,7 @@ public class AirplaneService implements IAirplaneService {
 
         return airplaneDao.getAirCrafts()
                 .stream()
-                .map(airCraftEntity -> new AirCraft(airCraftEntity.getAircraft_code(),
+                .map(airCraftEntity -> new AirCraft(airCraftEntity.getAircraftCode(),
                         airCraftEntity.getModel(), airCraftEntity.getRange())).collect(Collectors.toList());
 
     }

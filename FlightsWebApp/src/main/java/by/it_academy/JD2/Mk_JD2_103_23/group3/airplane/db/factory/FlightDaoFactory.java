@@ -3,7 +3,7 @@ package by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.factory;
 
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.FlightDao;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.api.IFlightDao;
-
+import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.connection.EMFFactory;
 
 
 public class FlightDaoFactory {
@@ -17,7 +17,7 @@ public class FlightDaoFactory {
             synchronized (FlightDaoFactory.class) {
                 if (instance == null) {
 
-                    instance = new FlightDao();
+                    instance = new FlightDao(EMFFactory.getInstance());
 
                 }
             }

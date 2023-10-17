@@ -1,9 +1,19 @@
 package by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import java.util.Objects;
 
+@Entity
+@Table(schema = "bookings", name = "aircrafts_data")
 public class AirCraftEntity {
-    private String aircraft_code;
+
+    @Id
+    @Column(name = "aircraft_code")
+    private String aircraftCode;
     private String model;
     private int range;
 
@@ -11,18 +21,18 @@ public class AirCraftEntity {
     public AirCraftEntity() {
     }
 
-    public AirCraftEntity(String aircraft_code, String model, int range) {
-        this.aircraft_code = aircraft_code;
+    public AirCraftEntity(String aircraftCode, String model, int range) {
+        this.aircraftCode = aircraftCode;
         this.model = model;
         this.range = range;
     }
 
-    public String getAircraft_code() {
-        return aircraft_code;
+    public String getAircraftCode() {
+        return aircraftCode;
     }
 
-    public void setAircraft_code(String aircraft_code) {
-        this.aircraft_code = aircraft_code;
+    public void setAircraftCode(String aircraftCode) {
+        this.aircraftCode = aircraftCode;
     }
 
     public String getModel() {
@@ -46,18 +56,18 @@ public class AirCraftEntity {
         if (this == o) return true;
         if (!(o instanceof AirCraftEntity)) return false;
         AirCraftEntity that = (AirCraftEntity) o;
-        return range == that.range && Objects.equals(aircraft_code, that.aircraft_code) && Objects.equals(model, that.model);
+        return range == that.range && Objects.equals(aircraftCode, that.aircraftCode) && Objects.equals(model, that.model);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(aircraft_code, model, range);
+        return Objects.hash(aircraftCode, model, range);
     }
 
     @Override
     public String toString() {
         return "AirCraftEntity{" +
-                "aircraft_code='" + aircraft_code + '\'' +
+                "aircraft_code='" + aircraftCode + '\'' +
                 ", model='" + model + '\'' +
                 ", range=" + range +
                 '}';
