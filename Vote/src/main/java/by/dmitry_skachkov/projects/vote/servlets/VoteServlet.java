@@ -11,8 +11,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-@WebServlet("/hello_with_name")
-public class HelloWithNameServlet extends HttpServlet {
+@WebServlet("/vote")
+public class VoteServlet extends HttpServlet {
     private HashMap<String, Integer> artistPopularity = new HashMap<>();
     private HashMap<String, Integer> genrePopularity = new HashMap<>();
     private LinkedList<String> userInfo = new LinkedList<>();
