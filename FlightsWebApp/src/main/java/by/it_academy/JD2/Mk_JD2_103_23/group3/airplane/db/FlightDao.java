@@ -1,5 +1,7 @@
 package by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db;
 
+import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.core.dto.FlightFilter;
+import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.core.dto.PageSize;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.api.IFlightDao;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.connection.DataSourceCreator;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.service.entity.Flight;
@@ -12,6 +14,7 @@ import java.util.List;
 public class FlightDao implements IFlightDao {
     DataSource ds = DataSourceCreator.getInstance();
 
+    private final static String GET_ALL_FLIGHT = "SELECT flight_id, flight_no, scheduled_departure, scheduled_departure_local, scheduled_arrival, scheduled_arrival_local, scheduled_duration, departure_airport, departure_airport_name, departure_city, arrival_airport, arrival_airport_name, arrival_city, status, aircraft_code, actual_departure, actual_departure_local, actual_arrival, actual_arrival_local, actual_duration FROM bookings.flights_v";
 
     String sql = "SELECT f.flight_id,\n" +
             "    f.flight_no,\n" +
@@ -41,122 +44,123 @@ public class FlightDao implements IFlightDao {
     public FlightDao() {
     }
 
+
     @Override
-    public List<Flight> getFlights() {
+    public List<Flight> getFlights(FlightFilter filter, PageSize pageSize) {
+        String sql = GET_ALL_FLIGHT;
 
-        List<Flight> flights = new ArrayList<>();
+        List<Object> params = new ArrayList<>();
+        if (filter != null) {
+            StringBuilder sqlBuilder = new StringBuilder();
 
-        try (Connection connection = ds.getConnection();
-             PreparedStatement ps = connection.prepareStatement(sql + ";");
-             ResultSet resultSet = ps.executeQuery()) {
-
-            while (resultSet.next()) {
-                flights.add(new Flight(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getTimestamp(3),
-                        resultSet.getTimestamp(4),
-                        resultSet.getTimestamp(5),
-                        resultSet.getTimestamp(6),
-                        resultSet.getString(7),
-                        resultSet.getString(8),
-                        resultSet.getString(9),
-                        resultSet.getString(10),
-                        resultSet.getString(11),
-                        resultSet.getString(12),
-                        resultSet.getString(13),
-                        resultSet.getString(14),
-                        resultSet.getString(15)));
+            boolean needSeparator = false;
+            if (filter.getArrivalAirport() != null) {
+                if (needSeparator) {
+                    sqlBuilder.append(" AND ");
+                } else {
+                    needSeparator = true;
+                }
+                sqlBuilder.append("arrival_airport = ?");
+                params.add(filter.getArrivalAirport());
             }
-            return flights;
+            if (filter.getDepartureAirport() != null) {
+                if (needSeparator) {
+                    sqlBuilder.append(" AND ");
+                } else {
+                    needSeparator = true;
+                }
+                sqlBuilder.append("departure_airport = ?");
+                params.add(filter.getDepartureAirport());
+            }
+            if (filter.getStatus() != null) {
+                if (needSeparator) {
+                    sqlBuilder.append(" AND ");
+                } else {
+                    needSeparator = true;
+                }
+                sqlBuilder.append("status = ?");
+                params.add(filter.getStatus());
+            }
+            if (filter.getScheduledDeparture() != null) {
+                if (needSeparator) {
+                    sqlBuilder.append(" AND ");
+                } else {
+                    needSeparator = true;
+                }
+                sqlBuilder.append("scheduled_departure >= ? AND scheduled_departure < ?");
+                params.add(filter.getScheduledDeparture());
+                params.add(filter.getScheduledDeparture().plusDays(1));
+            }
+            if (filter.getScheduledArrival() != null) {
+                if (needSeparator) {
+                    sqlBuilder.append(" AND ");
+                } else {
+                    needSeparator = true;
+                }
+                sqlBuilder.append("scheduled_arrival >= ? AND scheduled_arrival < ?");
+                params.add(filter.getScheduledArrival());
+                params.add(filter.getScheduledArrival().plusDays(1));
+            }
+
+            if (sqlBuilder.length() > 0) {
+                sqlBuilder.insert(0, " WHERE ");
+                sql += sqlBuilder.toString();
+            }
+        }
+
+        if (pageSize != null) {
+            int size = pageSize.getSize();
+            int page = pageSize.getPage();
+
+            sql += " LIMIT ? OFFSET ?";
+            params.add(size);
+            params.add(((page - 1) * size));
+        }
+
+        try (Connection conn = ds.getConnection();
+             PreparedStatement stm = conn.prepareStatement(sql);
+        ) {
+            int index = 1;
+            for (Object param : params) {
+                stm.setObject(index++, param);
+            }
+
+            try (ResultSet rs = stm.executeQuery();) {
+                List<Flight> data = new ArrayList<>();
+                while (rs.next()) {
+                    data.add(map(rs));
+                }
+
+                return data;
+            }
         } catch (SQLException e) {
-            throw new RuntimeException("Ошибка полуения данных", e);
+            throw new IllegalStateException("Ошибка получения информации об аэропортах", e);
         }
     }
 
-    @Override
-    public List<Flight> getFlights(int page, int size) {
-        List<Flight> flights = new ArrayList<>();
-        String sql = this.sql + " LIMIT " + size + " OFFSET " + ((page - 1) * size);
+    public Flight map(ResultSet rs) throws SQLException {
+        Flight item = new Flight();
+        item.setFlightId(rs.getString("flight_id"));
+        item.setFlightNo(rs.getString("flight_no"));
+        item.setScheduledDeparture(rs.getString("scheduled_departure"));
+        item.setScheduledDepartureLocal(rs.getString("scheduled_departure_local"));
+        item.setScheduledArrival(rs.getString("scheduled_arrival"));
+        item.setScheduledArrivalLocal(rs.getString("scheduled_arrival_local"));
+        item.setScheduledDuration(rs.getString("scheduled_duration"));
+        item.setDepartureAirport(rs.getString("departure_airport"));
+        item.setDepartureAirportName(rs.getString("departure_airport_name"));
+        item.setDepartureCity(rs.getString("departure_city"));
+        item.setArrivalAirport(rs.getString("arrival_airport"));
+        item.setArrivalAirportName(rs.getString("arrival_airport_name"));
+        item.setArrivalCity(rs.getString("arrival_city"));
+        item.setStatus(rs.getString("status"));
+        item.setAircraftCode(rs.getString("aircraft_code"));
+        item.setActualDeparture(rs.getString("actual_departure"));
+        item.setActualDepartureLocal(rs.getString("actual_departure_local"));
+        item.setActualArrival(rs.getString("actual_arrival"));
 
-        try (Connection connection = ds.getConnection();
-             PreparedStatement ps = connection.prepareStatement(sql + ";");
-             ResultSet resultSet = ps.executeQuery()) {
-
-            while (resultSet.next()) {
-                flights.add(new Flight(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getTimestamp(3),
-                        resultSet.getTimestamp(4),
-                        resultSet.getTimestamp(5),
-                        resultSet.getTimestamp(6),
-                        resultSet.getString(7),
-                        resultSet.getString(8),
-                        resultSet.getString(9),
-                        resultSet.getString(10),
-                        resultSet.getString(11),
-                        resultSet.getString(12),
-                        resultSet.getString(13),
-                        resultSet.getString(14),
-                        resultSet.getString(15)));
-            }
-            return flights;
-        } catch (SQLException e) {
-            throw new RuntimeException("Ошибка получения данных", e);
-        }
-    }
-
-    @Override
-    public List<Flight> getFlights(int page, int size, List<String> filters) {
-
-        String sql = createFiltersRequest(page, size, filters);
-        List<Flight> flights = new ArrayList<>();
-
-
-        try (Connection connection = ds.getConnection();
-             PreparedStatement ps = connection.prepareStatement(sql);
-             ResultSet resultSet = ps.executeQuery()) {
-
-            while (resultSet.next()) {
-                flights.add(new Flight(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getTimestamp(3),
-                        resultSet.getTimestamp(4),
-                        resultSet.getTimestamp(5),
-                        resultSet.getTimestamp(6),
-                        resultSet.getString(7),
-                        resultSet.getString(8),
-                        resultSet.getString(9),
-                        resultSet.getString(10),
-                        resultSet.getString(11),
-                        resultSet.getString(12),
-                        resultSet.getString(13),
-                        resultSet.getString(14),
-                        resultSet.getString(15)));
-            }
-            return flights;
-        } catch (SQLException e) {
-            throw new RuntimeException("Ошибка получения данных", e);
-        }
-    }
-
-    private String createFiltersRequest(int page, int size, List<String> filters) {
-        String pagination = " LIMIT " + size + " OFFSET " + ((page - 1) * size);
-        StringBuffer bf = new StringBuffer();
-
-        bf.append(this.sql);
-        bf.append(" ORDER BY ");
-
-        for (String filter : filters) {
-            bf.append(filter + ", ");
-        }
-
-        bf.deleteCharAt(bf.length() - 1); //delete space
-        bf.deleteCharAt(bf.length() - 1); // delete ',' symbol
-
-        bf.append(pagination);
-
-        bf.append(";");
-
-        return bf.toString();
+        return item;
     }
 }
+
+
