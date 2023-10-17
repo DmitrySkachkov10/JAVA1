@@ -2,7 +2,7 @@ package by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db;
 
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.api.IAirportDao;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.connection.DataSourceCreator;
-import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.service.entity.Airport;
+import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.entity.AirportEntity;
 
 import javax.sql.DataSource;
 
@@ -15,15 +15,15 @@ import java.util.List;
 
 public class AirportDao implements IAirportDao {
     private DataSource ds = DataSourceCreator.getInstance();
-    Airport airport = new Airport();
-    List<Airport> airports = new ArrayList<>();
+    AirportEntity airport = new AirportEntity();
+    List<AirportEntity> airports = new ArrayList<>();
 
     public AirportDao() {
     }
 
 
     @Override
-    public List<Airport> getAirports()  {
+    public List<AirportEntity> getAirports()  {
         String sql = " SELECT airport_code,\n" +
                 "    airport_name ->> lang() AS airport_name,\n" +
                 "    city ->> lang() AS city,\n" +

@@ -1,20 +1,20 @@
 package by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.core.dto;
 
-public class AirportDTO {
+public class Airport {
     private String id;
     private String airportName;
     private String city;
     private String coordinates;
     private String timeZone;
 
-    public AirportDTO(String airportName, String city, String coordinates, String timeZone) {
+    public Airport(String airportName, String city, String coordinates, String timeZone) {
         this.airportName = airportName;
         this.city = city;
         this.coordinates = coordinates;
         this.timeZone = timeZone;
     }
 
-    public AirportDTO() {
+    public Airport() {
     }
 
     public String getAirportName() {

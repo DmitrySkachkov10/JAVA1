@@ -1,8 +1,8 @@
 package by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.controller.servlets;
 
+import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.core.dto.Airport;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.service.api.IAirportService;
 
-import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.service.entity.Airport;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.service.facrtory.AirportServiceFactory;
 
 import jakarta.servlet.ServletException;
@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 

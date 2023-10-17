@@ -1,9 +1,9 @@
 package by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.controller.servlets;
 
+import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.core.dto.Flight;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.core.dto.FlightFilter;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.core.dto.PageSize;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.service.api.IFlightService;
-import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.service.entity.Flight;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.service.facrtory.FlightServiceFactory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

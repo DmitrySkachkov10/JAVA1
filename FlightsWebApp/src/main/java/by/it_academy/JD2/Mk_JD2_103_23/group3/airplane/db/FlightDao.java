@@ -4,7 +4,7 @@ import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.core.dto.FlightFilter;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.core.dto.PageSize;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.api.IFlightDao;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.connection.DataSourceCreator;
-import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.service.entity.Flight;
+import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.entity.FlightEntity;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -46,7 +46,7 @@ public class FlightDao implements IFlightDao {
 
 
     @Override
-    public List<Flight> getFlights(FlightFilter filter, PageSize pageSize) {
+    public List<FlightEntity> getFlights(FlightFilter filter, PageSize pageSize) {
         String sql = GET_ALL_FLIGHT;
 
         List<Object> params = new ArrayList<>();
@@ -126,7 +126,7 @@ public class FlightDao implements IFlightDao {
             }
 
             try (ResultSet rs = stm.executeQuery();) {
-                List<Flight> data = new ArrayList<>();
+                List<FlightEntity> data = new ArrayList<>();
                 while (rs.next()) {
                     data.add(map(rs));
                 }
@@ -138,8 +138,8 @@ public class FlightDao implements IFlightDao {
         }
     }
 
-    public Flight map(ResultSet rs) throws SQLException {
-        Flight item = new Flight();
+    public FlightEntity map(ResultSet rs) throws SQLException {
+        FlightEntity item = new FlightEntity();
         item.setFlightId(rs.getString("flight_id"));
         item.setFlightNo(rs.getString("flight_no"));
         item.setScheduledDeparture(rs.getString("scheduled_departure"));

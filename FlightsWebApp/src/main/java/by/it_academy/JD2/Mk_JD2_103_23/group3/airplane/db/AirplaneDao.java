@@ -1,8 +1,8 @@
 package by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db;
 
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.connection.DataSourceCreator;
-import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.service.entity.AirCraft;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.api.IAirplaneDao;
+import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.entity.AirCraftEntity;
 
 import javax.sql.DataSource;
 
@@ -17,14 +17,14 @@ public class AirplaneDao implements IAirplaneDao {
 
     private DataSource ds = DataSourceCreator.getInstance();
 
-    private List<AirCraft> airCrafts;
+    private List<AirCraftEntity> airCrafts;
 
     public AirplaneDao()  {
     }
 
 
     @Override
-    public List<AirCraft> getAirCrafts()  {
+    public List<AirCraftEntity> getAirCrafts()  {
         airCrafts = new ArrayList<>();
 
         String sql = "SELECT aircraft_code," +
@@ -36,7 +36,7 @@ public class AirplaneDao implements IAirplaneDao {
              PreparedStatement stm = conn.prepareStatement(sql);
              ResultSet resultSet = stm.executeQuery()) {
             while (resultSet.next()){
-                airCrafts.add(new AirCraft(resultSet.getString(1),
+                airCrafts.add(new AirCraftEntity(resultSet.getString(1),
                         resultSet.getString(2),
                         resultSet.getInt(3)));
             }

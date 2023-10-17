@@ -1,27 +1,20 @@
-package by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.service.entity;
+package by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.db.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Objects;
 
-@Entity
-@Table(schema = "bookings", name = "aircrafts_data")
-public class AirCraft {
-
-    @Id
+public class AirCraftEntity {
     private String aircraft_code;
     private String model;
     private int range;
 
-    public AirCraft(String aircraft_code, String model, int range) {
+
+    public AirCraftEntity() {
+    }
+
+    public AirCraftEntity(String aircraft_code, String model, int range) {
         this.aircraft_code = aircraft_code;
         this.model = model;
         this.range = range;
-    }
-
-    public AirCraft(){
-
     }
 
     public String getAircraft_code() {
@@ -48,13 +41,12 @@ public class AirCraft {
         this.range = range;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AirCraft airCraft = (AirCraft) o;
-        return range == airCraft.range && Objects.equals(aircraft_code, airCraft.aircraft_code) && Objects.equals(model, airCraft.model);
+        if (!(o instanceof AirCraftEntity)) return false;
+        AirCraftEntity that = (AirCraftEntity) o;
+        return range == that.range && Objects.equals(aircraft_code, that.aircraft_code) && Objects.equals(model, that.model);
     }
 
     @Override
@@ -64,7 +56,7 @@ public class AirCraft {
 
     @Override
     public String toString() {
-        return "AirCraft{" +
+        return "AirCraftEntity{" +
                 "aircraft_code='" + aircraft_code + '\'' +
                 ", model='" + model + '\'' +
                 ", range=" + range +

@@ -1,7 +1,7 @@
 package by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.controller.servlets;
 
+import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.core.dto.AirCraft;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.service.api.IAirplaneService;
-import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.service.entity.AirCraft;
 import by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.service.facrtory.AirplaneServiceFactory;
 
 
@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/plane")

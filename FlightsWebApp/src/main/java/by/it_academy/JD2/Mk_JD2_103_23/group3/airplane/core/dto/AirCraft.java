@@ -1,11 +1,11 @@
 package by.it_academy.JD2.Mk_JD2_103_23.group3.airplane.core.dto;
 
-public class AirCraftDTO {
+public class AirCraft {
     private String aircraft_code;
     private String model;
     private int range;
 
-    public AirCraftDTO(String aircraft_code, String model, int range) {
+    public AirCraft(String aircraft_code, String model, int range) {
         this.aircraft_code = aircraft_code;
         this.model = model;
         this.range = range;
