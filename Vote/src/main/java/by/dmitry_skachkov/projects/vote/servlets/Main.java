@@ -10,6 +10,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws IOException {
 
+        //hometask with console working
+
         Scanner scanner = new Scanner(System.in);
 
 
