@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  firstService:
+    build: firstService
+    image: first-service:1.0.0
+    ports:
+      - "8080:8080"
+    networks:
+      - test_network
+  secondService:
+    build: secondService
+    image: second-service:1.0.0
+    ports:
+      - "8081:8081"
+    networks:
+      - test_network
+  proxy:
+    build: proxy
+    image: proxy:1.1.6
+    ports:
+      - "80:80"
+    networks:
+      - test_network
+networks:
+  test_network:
+    driver: bridge
+    name: "test_network"
