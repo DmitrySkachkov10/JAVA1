@@ -1,0 +1,7 @@
+server:
+  port: 8080
+
+my:
+  app:
+    feign:
+      address: "http://secondService:8081/second"

@@ -1,0 +1,7 @@
+server:
+  port: 8081
+
+my:
+  app:
+    feign:
+      address: "http://firstService:8080/first"
