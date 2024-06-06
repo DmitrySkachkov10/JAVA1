@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/messanger
+    username: postgres
+    password: postgres
+    hikari:
+      maximum-pool-size: 10
+server:
+  port: 9090
