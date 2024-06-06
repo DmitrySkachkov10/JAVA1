@@ -1,2 +1,11 @@
-package by.dmitry_skachoku.BeanPostProcessor.quoters;public @interface InjectRandomInt {
+package by.dmitry_skachoku.BeanPostProcessor.quoters;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+@Retention(RetentionPolicy.RUNTIME)
+public @interface InjectRandomInt {
+
+    int min();
+    int max();
 }
