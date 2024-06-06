@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class BeanPostProcessorApplication implements CommandLineRunner {
 
+
     @Autowired
     private TerminationQuoter quoter;
 
