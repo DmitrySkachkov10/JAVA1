@@ -1,0 +1,60 @@
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+gen/
+
+# User-specific files
+*.swp
+*.swo
+*.DS_Store
+*.class
+*.log
+
+# Gradle
+.gradle/
+build/
+**/build/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.rbc
+*.swp
+*.swo
+*.idea/
+.idea/*
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/vcs.xml
+.idea/jsLibraryMappings.xml
+.idea/.name
+.idea/compiler.xml
+.idea/.idea.klibcache
+.idea/.nb-gradle/.import
+.idea/misc.xml
+
+# IDEA generated folders
+.idea
+*.iws
+*.iml
+*.ipr
+
+# Build output
+bin/
+tmp/
+
+target/
+build/
+
+*.log
+
+hs_err_pid*
