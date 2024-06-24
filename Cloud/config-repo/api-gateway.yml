@@ -1,10 +1,6 @@
 server:
   port: 8082
 
-spring:
-  application:
-    name: api-gateway
-
 eureka:
   client:
     service-url:
@@ -15,6 +11,8 @@ logging:
     console: "%C{1.} [%-5level] %d{HH:mm:ss} - %msg%n"
 
 spring:
+  application:
+    name: api-gateway
   main:
     web-application-type: reactive
   cloud:
