@@ -1,6 +1,6 @@
 # application.yml
 server:
-  port: 8082
+  port: 0
 
 spring:
   application:
