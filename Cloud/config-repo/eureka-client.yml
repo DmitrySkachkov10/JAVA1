@@ -1,14 +1,12 @@
 server:
-  port: 8888
+  port: 8082
 
 spring:
   application:
-    name: config-server
+    name: eureka-client
   cloud:
     config:
-      server:
-        native:
-          search-locations: file:./config-repo/
+      uri: http://localhost:8888
 
 eureka:
   client:
